@@ -1,0 +1,69 @@
+.verify-container {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  .card {
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+    
+    .card-header {
+      background-color: #4a6baf;
+      color: white;
+      border-radius: 12px 12px 0 0 !important;
+      padding: 1.5rem;
+      
+      h2 {
+        margin: 0;
+        font-weight: 600;
+      }
+    }
+    
+    .card-body {
+      padding: 2rem;
+      
+      .alert {
+        border-radius: 8px;
+      }
+      
+      .form-label {
+        font-weight: 500;
+        color: #495057;
+      }
+      
+      .input-group-text {
+        background-color: #f8f9fa;
+      }
+      
+      .btn-primary {
+        background-color: #4a6baf;
+        border-color: #4a6baf;
+        &:hover {
+          background-color: #3a5a9f;
+          border-color: #3a5a9f;
+        }
+      }
+    }
+    
+    .card-footer {
+      background-color: #f8f9fa;
+      border-radius: 0 0 12px 12px !important;
+      padding: 1rem;
+    }
+  }
+}
+
+/* Responsive dizayn */
+@media (max-width: 576px) {
+  .verify-container {
+    margin: 1rem auto;
+    
+    .card {
+      .card-header, .card-body, .card-footer {
+        padding: 1.25rem;
+      }
+    }
+  }
+}
+  

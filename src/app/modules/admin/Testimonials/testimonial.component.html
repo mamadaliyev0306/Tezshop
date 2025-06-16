@@ -1,0 +1,53 @@
+<div class="container py-4">
+    <h2 class="mb-4">Fikrlar boshqaruvi</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mb-5 border p-4 rounded bg-light">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Muallif ismi</label>
+          <input type="text" class="form-control" formControlName="authorName" />
+        </div>
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Rasm URL (ixtiyoriy)</label>
+          <input type="text" class="form-control" formControlName="imageUrl" />
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Fikr matni</label>
+        <textarea class="form-control" rows="4" formControlName="content"></textarea>
+      </div>
+  
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary" [disabled]="form.invalid">
+          {{ editingId ? 'Yangilash' : 'Qo‘shish' }}
+        </button>
+        <button *ngIf="editingId" type="button" class="btn btn-secondary" (click)="onCancelEdit()">Bekor qilish</button>
+      </div>
+    </form>
+  
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+  
+    <div *ngIf="!isLoading && testimonials.length > 0" class="row">
+      <div class="col-md-6 mb-3" *ngFor="let t of testimonials">
+        <div class="card h-100 shadow-sm">
+          <img *ngIf="t.imageUrl" [src]="t.imageUrl" class="card-img-top" alt="Fikr rasmi" />
+          <div class="card-body">
+            <h5 class="card-title">{{ t.authorName }}</h5>
+            <p class="card-text">{{ t.content }}</p>
+            <div class="d-flex justify-content-end gap-2">
+              <button class="btn btn-sm btn-outline-primary" (click)="onEdit(t)">Tahrirlash</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="onDelete(t.id)">O‘chirish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && testimonials.length === 0" class="text-muted">
+      Hech qanday fikrlar mavjud emas.
+    </div>
+  </div>
+  

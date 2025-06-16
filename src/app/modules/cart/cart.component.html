@@ -1,0 +1,87 @@
+<div class="cart-container" [@fadeIn]>
+    <div class="cart-header">
+      <h1>
+        <mat-icon>shopping_cart</mat-icon>
+        Savatcham
+      </h1>
+      <div class="header-actions">
+        <button mat-stroked-button color="warn" (click)="clearCart()" [disabled]="!cart || cart.items.length === 0 || isUpdating">
+          <mat-icon>delete_sweep</mat-icon>
+          Tozalash
+        </button>
+      </div>
+    </div>
+  
+    <div class="loading-spinner" *ngIf="isLoading">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  
+    <div class="empty-cart" *ngIf="!isLoading && (!cart || cart.items.length === 0)">
+      <div class="empty-content">
+        <mat-icon>remove_shopping_cart</mat-icon>
+        <h2>Sizning savatchangiz bo'sh</h2>
+        <p>Mahsulot qo'shish uchun do'kon sahifasiga o'ting</p>
+        <button mat-raised-button color="primary" routerLink="/products">
+          <mat-icon>store</mat-icon>
+          Do'konga o'tish
+        </button>
+      </div>
+    </div>
+  
+    <div class="cart-content" *ngIf="!isLoading && cart && cart.items.length > 0" [@listAnimation]>
+      <div class="cart-items">
+        <div class="cart-item" *ngFor="let item of cart.items" [@fadeIn]>
+          <div class="item-image" (click)="viewProduct(item.productId)">
+            <img [src]="item.productImageUrl || 'assets/images/product-placeholder.png'" [alt]="item.productName">
+          </div>
+          
+          <div class="item-details">
+            <h3 class="item-name" (click)="viewProduct(item.productId)">{{ item.productName }}</h3>
+            <div class="item-price">{{ item.productPrice | currency }}</div>
+            
+            <div class="item-actions">
+              <div class="quantity-control">
+                <button mat-icon-button (click)="updateQuantity(item, item.quantity - 1)" [disabled]="item.quantity <= 1 || isUpdating">
+                  <mat-icon>remove</mat-icon>
+                </button>
+                <span class="quantity">{{ item.quantity }}</span>
+                <button mat-icon-button (click)="updateQuantity(item, item.quantity + 1)" [disabled]="isUpdating">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              
+              <button mat-icon-button color="warn" (click)="removeItem(item.cartItemId)" [disabled]="isUpdating">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="cart-summary" [@pulse]="pulse">
+        <div class="summary-header">
+          <h3>Buyurtma xulosasi</h3>
+        </div>
+        
+        <div class="summary-details">
+          <div class="summary-row">
+            <span>Jami mahsulotlar:</span>
+            <span>{{ cart.totalItems }} ta</span>
+          </div>
+          <div class="summary-row">
+            <span>Yetkazib berish:</span>
+            <span>Bepul</span>
+          </div>
+          <div class="summary-row total">
+            <span>Umumiy summa:</span>
+            <span>{{ cart.totalPrice | currency }}</span>
+          </div>
+        </div>
+        
+        <button mat-raised-button color="primary" class="checkout-btn" (click)="openCheckoutDialog()">
+          <mat-icon>shopping_bag</mat-icon>
+          Buyurtma berish
+        </button>
+      </div>
+    </div>
+  </div>

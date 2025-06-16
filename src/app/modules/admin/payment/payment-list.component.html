@@ -1,0 +1,77 @@
+<div class="payment-list-container">
+    <h2>To‘lovlar ro‘yxati</h2>
+  
+    <!-- Filter form -->
+    <form class="filter-form" (ngSubmit)="onFilterChange()">
+      <input type="number" placeholder="User ID" [(ngModel)]="filter.userId" name="userId" />
+      <input type="number" placeholder="Order ID" [(ngModel)]="filter.orderId" name="orderId" />
+      <select [(ngModel)]="filter.status" name="status">
+        <option [value]="null">Barcha holatlar</option>
+        <option [value]="PaymentStatus.Completed">Yakunlangan</option>
+        <option [value]="PaymentStatus.Cancelled">Bekor qilingan</option>
+      </select>
+      <select [(ngModel)]="filter.paymentMetod" name="paymentMethod">
+        <option [value]="null">Barcha usullar</option>
+        <option [value]="PaymentMethod.Click">Click</option>
+        <option [value]="PaymentMethod.Payme">Payme</option>
+      </select>
+      <input type="date" [(ngModel)]="filter.fromDate" name="fromDate" />
+      <input type="date" [(ngModel)]="filter.toDate" name="toDate" />
+      <button type="submit">Filtrlash</button>
+    </form>
+  
+    <!-- Payment table -->
+    <table class="payment-table" *ngIf="payments.length > 0; else noPayments">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Order</th>
+          <th>Status</th>
+          <th>Usul</th>
+          <th>Miqdori</th>
+          <th>Sana</th>
+          <th>Amallar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.userId }}</td>
+          <td>{{ payment.orderId }}</td>
+          <td>{{ payment.status }}</td>
+          <td>{{ payment.paymentMetod }}</td>
+          <td>{{ payment.amount | currency:'UZS' }}</td>
+          <td>{{ payment.date | date:'short' }}</td>
+          <td>
+            <button (click)="openCancelModal(payment.id)">Bekor qilish</button>
+            <button (click)="refundPayment(payment.id)">Qaytarish</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <ng-template #noPayments>
+      <p>Hech qanday to‘lovlar topilmadi.</p>
+    </ng-template>
+  
+    <!-- Pagination -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button (click)="onPageChange(filter.page - 1)" [disabled]="filter.page === 1">⟨</button>
+      <span>Sahifa {{ filter.page }} / {{ totalPages }}</span>
+      <button (click)="onPageChange(filter.page + 1)" [disabled]="filter.page === totalPages">⟩</button>
+    </div>
+  
+    <!-- Cancel Modal -->
+    <div class="modal" *ngIf="showCancelModal">
+      <div class="modal-content">
+        <h3>To‘lovni bekor qilish</h3>
+        <textarea [(ngModel)]="cancelReason" placeholder="Bekor qilish sababi..."></textarea>
+        <div class="modal-actions">
+          <button (click)="confirmCancel()">Tasdiqlash</button>
+          <button (click)="closeModal()">Bekor qilish</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

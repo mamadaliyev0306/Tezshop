@@ -1,0 +1,110 @@
+<div class="checkout-dialog" [@fadeIn]>
+    <h2 mat-dialog-title>
+      <mat-icon>shopping_bag</mat-icon>
+      Buyurtma berish
+    </h2>
+  
+    <mat-dialog-content [@shake]="shake">
+      <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+        <div class="order-summary">
+          <h3>
+            <mat-icon>receipt</mat-icon>
+            Buyurtma xulosasi
+          </h3>
+          
+          <div class="summary-item">
+            <span>Jami mahsulotlar:</span>
+            <span>{{ data.cart.totalItems }} ta</span>
+          </div>
+          
+          <div class="summary-item">
+            <span>Yetkazib berish:</span>
+            <span>Bepul</span>
+          </div>
+          
+          <div class="summary-item total">
+            <span>Umumiy summa:</span>
+            <span>{{ data.cart.totalPrice | currency }}</span>
+          </div>
+        </div>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>To'liq ism</mat-label>
+          <input matInput formControlName="fullName" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="checkoutForm.get('fullName')?.hasError('required')">
+            Ism kiritilishi shart
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('fullName')?.hasError('minlength')">
+            Kamida 3 ta belgi
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Telefon raqam</mat-label>
+          <input matInput formControlName="phoneNumber" required type="tel">
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-error *ngIf="checkoutForm.get('phoneNumber')?.hasError('required')">
+            Telefon raqam kiritilishi shart
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('phoneNumber')?.hasError('pattern')">
+            To'g'ri telefon raqam kiriting
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Yetkazib berish manzili</mat-label>
+          <textarea matInput formControlName="address" required rows="3"></textarea>
+          <mat-icon matSuffix>location_on</mat-icon>
+          <mat-error *ngIf="checkoutForm.get('address')?.hasError('required')">
+            Manzil kiritilishi shart
+          </mat-error>
+          <mat-error *ngIf="checkoutForm.get('address')?.hasError('minlength')">
+            Manzil juda qisqa (kamida 10 belgi)
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>To'lov usuli</mat-label>
+          <mat-select formControlName="paymentMethod" required>
+            <mat-option *ngFor="let method of paymentMethods" [value]="method.value">
+              <mat-icon>{{ getPaymentMethodIcon(method.value) }}</mat-icon>
+              {{ method.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="checkoutForm.get('paymentMethod')?.hasError('required')">
+            To'lov usulini tanlang
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Qo'shimcha izohlar (ixtiyoriy)</mat-label>
+          <textarea matInput formControlName="additionalNotes" rows="2"></textarea>
+          <mat-icon matSuffix>notes</mat-icon>
+        </mat-form-field>
+      </form>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close [disabled]="isLoading">
+        <mat-icon>close</mat-icon>
+        Bekor qilish
+      </button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        type="submit" 
+        [disabled]="isLoading" 
+        (click)="onSubmit()"
+      >
+        <ng-container *ngIf="!isLoading">
+          <mat-icon>check_circle</mat-icon>
+          Tasdiqlash
+        </ng-container>
+        <ng-container *ngIf="isLoading">
+          <mat-spinner diameter="20" color="accent"></mat-spinner>
+          Jo'natilmoqda...
+        </ng-container>
+      </button>
+    </mat-dialog-actions>
+  </div>

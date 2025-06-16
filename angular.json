@@ -32,7 +32,9 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/animate.css/animate.min.css",
+               "node_modules/primeicons/primeicons.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -72,7 +74,8 @@
               "buildTarget": "tez-shop:build:production"
             },
             "development": {
-              "buildTarget": "tez-shop:build:development"
+              "buildTarget": "tez-shop:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
@@ -103,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "380e0e27-b759-4a12-aea7-2f5cb0bc18e6"
   }
 }

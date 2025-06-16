@@ -1,0 +1,94 @@
+<div class="verify-container">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="text-center">Email Manzilingizni Tasdiqlang</h2>
+    </div>
+    
+    <div class="card-body">
+      <!-- Xabarlar -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show">
+        <i class="bi bi-exclamation-circle me-2"></i>
+        {{ errorMessage }}
+        <button type="button" class="btn-close" (click)="errorMessage = ''"></button>
+      </div>
+      
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show">
+        <i class="bi bi-check-circle me-2"></i>
+        {{ successMessage }}
+        <button type="button" class="btn-close" (click)="successMessage = ''"></button>
+      </div>
+
+      <!-- Forma -->
+      <form (ngSubmit)="verifyEmail()" class="mt-4">
+        <!-- Email input -->
+        <div class="mb-4">
+          <label for="email" class="form-label">Email manzilingiz</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-envelope"></i>
+            </span>
+            <input 
+              type="email" 
+              id="email" 
+              [(ngModel)]="email" 
+              name="email" 
+              class="form-control form-control-lg" 
+              readonly
+              placeholder="sizning@email.uz">
+          </div>
+        </div>
+        
+        <!-- Kod input -->
+        <div class="mb-4">
+          <label for="code" class="form-label">Tasdiqlash kodi</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-shield-lock"></i>
+            </span>
+            <input 
+              type="text" 
+              id="code" 
+              [(ngModel)]="Code" 
+              name="verificationCode" 
+              class="form-control form-control-lg" 
+              required
+              placeholder="6 xonali kod">
+          </div>
+          <small class="text-muted">Emailingizga yuborilgan 6 xonali kodni kiriting</small>
+        </div>
+        
+        <!-- Tasdiqlash tugmasi -->
+        <div class="d-grid gap-2 mb-3">
+          <button 
+            type="submit" 
+            class="btn btn-primary btn-lg" 
+            [disabled]="isVerifying">
+            <span *ngIf="!isVerifying">
+              <i class="bi bi-check-circle me-2"></i>Tasdiqlash
+            </span>
+            <span *ngIf="isVerifying">
+              <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              Tekshirilmoqda...
+            </span>
+          </button>
+        </div>
+        
+        <!-- Qayta yuborish -->
+        <div class="text-center">
+          <p class="mb-2">Kodni olmadingizmi?</p>
+          <button 
+            type="button" 
+            class="btn btn-outline-secondary" 
+            (click)="resendCode()"
+            [disabled]="isVerifying">
+            <i class="bi bi-arrow-repeat me-2"></i>Kodni qayta yuborish
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="card-footer text-center text-muted">
+      <small>© 2023 Sizning Kompaniyangiz. Barcha huquqlar himoyalangan.</small>
+    </div>
+  </div>
+</div>

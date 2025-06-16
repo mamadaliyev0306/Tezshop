@@ -1,0 +1,38 @@
+<div class="wishlist-container">
+    <div class="header">
+      <h2>My Wishlist</h2>
+      <span class="item-count" *ngIf="!isLoading">({{ getTotalItems() }} items)</span>
+    </div>
+  
+    <div class="loading-spinner" *ngIf="isLoading">
+      <mat-spinner diameter="50"></mat-spinner>
+    </div>
+  
+    <div class="empty-wishlist" *ngIf="!isLoading && wishlistItems.length === 0">
+      <mat-icon>favorite_border</mat-icon>
+      <p>Your wishlist is empty</p>
+      <button mat-raised-button color="primary" routerLink="/products">Browse Products</button>
+    </div>
+  
+    <div class="wishlist-items" *ngIf="!isLoading && wishlistItems.length > 0">
+      <div class="wishlist-item" *ngFor="let item of wishlistItems; trackBy: trackByProductId">
+        <div class="product-image">
+          <img [src]="item.productImage || 'assets/images/product-placeholder.png'" [alt]="item.productName">
+        </div>
+        <div class="product-details">
+          <h3 class="product-name">{{ item.productName }}</h3>
+          <div class="product-price">
+            <span class="current-price">{{ item.productPrice | currency }}</span>
+          </div>
+        </div>
+        <div class="product-actions">
+          <button mat-icon-button color="warn" (click)="removeFromWishlist(item.productId)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" class="add-to-cart">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

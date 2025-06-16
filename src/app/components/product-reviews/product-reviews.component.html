@@ -1,0 +1,12 @@
+<div class="product-reviews">
+    <h3>Sharhlar</h3>
+    <div *ngFor="let review of reviews" class="review">
+      <div class="review-header">
+        <app-rating-stars [rating]="review.rating" [readonly]="true"></app-rating-stars>
+        <span class="review-author">{{ review.author }}</span>
+        <span class="review-date">{{ review.date | date: 'shortDate' }}</span>
+      </div>
+      <p class="review-comment">{{ review.comment }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,77 @@
+<div class="contact-form-container" [@fadeIn]>
+  <h2 class="title">Biz bilan bog'laning</h2>
+  <p class="subtitle">Savollaringiz bo'lsa, quyidagi formani to'ldiring</p>
+
+  <div class="success-message" *ngIf="showSuccessMessage">
+    <mat-icon>check_circle</mat-icon>
+    <h3>Xabaringiz yuborildi!</h3>
+    <p>Tez orada siz bilan bog'lanamiz</p>
+    <button mat-raised-button color="primary" (click)="showSuccessMessage = false">
+      Yana xabar yuborish
+    </button>
+  </div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" [@shake]="shake" class="form" *ngIf="!showSuccessMessage">
+    
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Ismingiz</mat-label>
+      <input matInput formControlName="firstName" required />
+      <mat-icon matSuffix>person</mat-icon>
+      <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+        Ism kiritilishi shart
+      </mat-error>
+      <mat-error *ngIf="contactForm.get('firstName')?.hasError('minlength')">
+        Kamida 3 ta belgi
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Familiya</mat-label>
+      <input matInput formControlName="lastName" />
+      <mat-icon matSuffix>people</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email manzilingiz</mat-label>
+      <input matInput formControlName="email" type="email" required />
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+        Email kiritilishi shart
+      </mat-error>
+      <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+        To'g'ri email kiriting
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Telefon raqamingiz (ixtiyoriy)</mat-label>
+      <input matInput formControlName="phoneNumber" type="tel" />
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Xabaringiz</mat-label>
+      <textarea matInput formControlName="message" rows="5" required></textarea>
+      <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
+        Xabar kiritilishi shart
+      </mat-error>
+      <mat-error *ngIf="contactForm.get('message')?.hasError('minlength')">
+        Xabar juda qisqa (kamida 10 belgi)
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="isSending"
+      class="submit-button"
+    >
+      <ng-container *ngIf="!isSending">Xabarni yuborish</ng-container>
+      <ng-container *ngIf="isSending">
+        <mat-spinner diameter="20" color="accent"></mat-spinner>
+        &nbsp; Yuborilmoqda...
+      </ng-container>
+    </button>
+  </form>
+</div>

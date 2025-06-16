@@ -1,0 +1,818 @@
+@use '../assets/styles/mixins' as *;
+@use '../assets/styles/variables' as *;
+@use 'sass:color';
+
+// Asosiy konteyner
+.app-container {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Asosiy header */
+.main-header {
+  padding: 12px 0;
+  background-color: white;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* Logo */
+  .logo {
+    .logo-link {
+      font-size: 34px;
+      font-weight: bold;
+      color: #440bf1;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  /* Kategoriyalar tugmasi */
+  .categories-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+    min-width: 60px;
+
+    .material-icons {
+      font-size: 24px;
+      color: #555;
+    }
+
+    .btn-label {
+      font-size: 12px;
+      color: #555;
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+      border-radius: 5px;
+    }
+  }
+
+  /* Katta qidiruv paneli */
+  .search-container {
+    flex: 1;
+    max-width: 600px;
+    margin: 0 10px;
+  }
+
+  .search-bar {
+    display: flex;
+    border: 2px solid #3498db;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 44px;
+
+    input {
+      flex: 1;
+      border: none;
+      padding: 0 15px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #2980b9;
+      }
+
+      .material-icons {
+        font-size: 22px;
+      }
+    }
+  }
+
+  /* Foydalanuvchi elementlari */
+  .user-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 50px;
+      position: relative;
+
+      .nav-link, .login-btn, .user-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        text-decoration: none;
+        color: #555;
+        padding: 5px;
+        border-radius: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        .material-icons {
+          font-size: 24px;
+        }
+
+        .action-label {
+          font-size: 12px;
+        }
+
+        &:hover {
+          background-color: #f5f5f5;
+        }
+      }
+
+      .badge {
+        position: absolute;
+        top: -2px;
+        right: 5px;
+        background-color: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .language-selector {
+      cursor: pointer;
+    }
+  }
+}
+
+/* Ikkinchi qator */
+.secondary-header {
+  background-color: #f8f9fa;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .header-bottom {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+
+    .material-icons {
+      font-size: 18px;
+      color: #3498db;
+    }
+  }
+
+  .promotions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .promo-link {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #555;
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #3498db;
+      }
+
+      .material-icons {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+/* Responsive dizayn */
+@media (max-width: 992px) {
+  .main-header {
+    .header-top {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .search-bar {
+      order: 1;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .user-actions {
+      margin-left: 0;
+    }
+  }
+
+  .secondary-header {
+    .header-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .main-header {
+    .categories-btn span,
+    .user-actions .nav-link span,
+    .user-actions .language-selector span,
+    .user-actions .user-btn span,
+    .user-actions .login-btn span {
+      display: none;
+    }
+  }
+}
+
+.hero-banner {
+  .container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .banner-slider {
+    width: 100%;
+    height: 200px; /* Yoki istalgan balandlik */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .banner-slide.active {
+    width: 100%;
+    height: 100%;
+    display: block;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+/* Responsive banner */
+@media (max-width: 768px) {
+  .hero-banner {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    
+    .banner-slide {
+      padding-bottom: 50%; // Mobilda balandroq banner
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-banner {
+    .banner-slide {
+      padding-bottom: 60%; // Kichik ekranlarda balandroq
+    }
+  }
+}
+
+/* Banner slider uchun qo'shimcha stillar */
+.banner-slider {
+  .banner-slide {
+    display: none;
+    animation: fadeIn 0.5s ease;
+    
+    &.active {
+      display: block;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+.user-dropdown {
+  position: relative;
+  
+  .user-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 200px;
+    z-index: 1000;
+    
+    .dropdown-item {
+      padding: 10px 16px;
+      cursor: pointer;
+      
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+    
+    .dropdown-divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 4px 0;
+    }
+    
+    .logout-btn {
+      color: #e74c3c;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+    }
+  }
+}
+.language-selector {
+  position: relative;
+  cursor: pointer;
+  
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
+    
+    .language-option {
+      padding: 8px 16px;
+      white-space: nowrap;
+      
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}.categories-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  
+  .categories-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .category-item {
+    position: relative;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #333;
+      text-decoration: none;
+    }
+    
+    &:hover {
+      background-color: #f9f9f9;
+    }
+  }
+  
+  .subcategories-menu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 250px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    
+    .subcategory-item {
+      padding: 10px 16px;
+      
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}
+// Mahsulotlar bo'limi
+.products-section {
+  padding: $spacing-xl 0;
+
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: $spacing-xl;
+    position: relative;
+    padding-bottom: $spacing-sm;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background: $primary-color;
+    }
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+  }
+
+  .product-card {
+    background: $white;
+    border-radius: $border-radius-md;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+
+    &:hover {
+      box-shadow: $shadow-md;
+      transform: translateY(-5px);
+
+      .product-actions {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .product-badge {
+      position: absolute;
+      top: $spacing-sm;
+      left: $spacing-sm;
+      background: $danger-color;
+      color: $white;
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-sm;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .product-actions {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: $spacing-sm;
+        padding: $spacing-md;
+        background: rgba($dark-color, 0.7);
+        opacity: 0;
+        transform: translateY(100%);
+        transition: all 0.3s ease;
+
+        .action-btn {
+          background: $white;
+          width: 40px;
+          height: 40px;
+          border-radius: $border-radius-circle;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: $text-primary;
+          @include transition;
+
+          &:hover {
+            background: $primary-color;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .product-info {
+      padding: $spacing-md;
+
+      .product-name {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: $spacing-sm;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .product-rating {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+        margin-bottom: $spacing-sm;
+        color: $warning-color;
+        font-size: 0.9rem;
+
+        .material-icons {
+          font-size: 1.1rem;
+        }
+      }
+
+      .product-price {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+
+        .current-price {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: $primary-color;
+        }
+
+        .original-price {
+          font-size: 0.9rem;
+          text-decoration: line-through;
+          color: $text-light;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-xl;
+
+    .page-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: $border-radius-sm;
+      border: 1px solid $text-light;
+      background: none;
+      color: $text-primary;
+      cursor: pointer;
+      @include transition;
+
+      &:hover:not(.active) {
+        border-color: $primary-color;
+        color: $primary-color;
+      }
+
+      &.active {
+        background: $primary-color;
+        color: $white;
+        border-color: $primary-color;
+      }
+    }
+
+    .page-dots {
+      padding: 0 $spacing-sm;
+    }
+
+    .next-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: $border-radius-sm;
+      border: 1px solid $text-light;
+      background: none;
+      color: $text-primary;
+      cursor: pointer;
+      @include transition;
+
+      &:hover:not([disabled]) {
+        border-color: $primary-color;
+        color: $primary-color;
+      }
+
+      &[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Footer stillari
+.app-footer {
+  background: $dark-color;
+  color: $white;
+  padding: $spacing-xxl 0 0;
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xxl;
+
+    .footer-section {
+      .footer-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: $spacing-lg;
+        position: relative;
+        padding-bottom: $spacing-sm;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 40px;
+          height: 2px;
+          background: $primary-color;
+        }
+      }
+
+      .footer-text {
+        margin-bottom: $spacing-md;
+        line-height: 1.6;
+        color: rgba($white, 0.7);
+      }
+
+      .social-links {
+        display: flex;
+        gap: $spacing-md;
+
+        .social-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: $border-radius-circle;
+          background: rgba($white, 0.1);
+          color: $white;
+          @include transition;
+
+          &:hover {
+            background: $primary-color;
+            transform: translateY(-3px);
+          }
+        }
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: $spacing-sm;
+
+          a {
+            color: rgba($white, 0.7);
+            @include transition;
+
+            &:hover {
+              color: $primary-color;
+              padding-left: $spacing-xs;
+            }
+          }
+        }
+      }
+
+      .contact-info {
+        p {
+          display: flex;
+          align-items: center;
+          gap: $spacing-sm;
+          margin-bottom: $spacing-md;
+          color: rgba($white, 0.7);
+
+          .material-icons {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba($white, 0.1);
+    padding: $spacing-lg 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-md;
+    text-align: center;
+
+    @include respond-to(md) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    p {
+      color: rgba($white, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .payment-methods {
+      display: flex;
+      gap: $spacing-md;
+
+      img {
+        height: 25px;
+        filter: grayscale(100%) brightness(2);
+        opacity: 0.7;
+        @include transition;
+
+        &:hover {
+          filter: none;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// Responsive dizayn
+@include respond-to(md) {
+  .app-header {
+    .header-content {
+      flex-wrap: wrap;
+      padding: $spacing-sm 0;
+    }
+
+    .search-bar {
+      order: 3;
+      width: 100%;
+      margin: $spacing-sm 0;
+    }
+  }
+
+  .products-section {
+    .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: $spacing-md;
+    }
+  }
+}
+
+@include respond-to(sm) {
+  .products-section {
+    .products-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+}

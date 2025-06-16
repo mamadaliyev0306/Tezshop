@@ -1,0 +1,124 @@
+<div class="contact-container" @fadeIn>
+    <div class="contact-header">
+      <h2>Bog'lanish</h2>
+      <p>Savollaringiz yoki takliflaringiz bo'lsa, bizga yozishingiz mumkin</p>
+    </div>
+  
+    <div class="contact-content">
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Ismingiz</mat-label>
+          <input matInput formControlName="fullName" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="contactForm.get('fullName')?.hasError('required')">
+            Ism kiritilishi shart
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required>
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+            Email kiritilishi shart
+          </mat-error>
+          <mat-error *ngIf="contactForm.get('email')?.hasError('email')">
+            To'g'ri email kiriting
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Telefon raqam (ixtiyoriy)</mat-label>
+          <input matInput formControlName="phoneNumber" type="tel">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Xabaringiz</mat-label>
+          <textarea matInput formControlName="message" rows="5" required></textarea>
+          <mat-error *ngIf="contactForm.get('message')?.hasError('required')">
+            Xabar kiritilishi shart
+          </mat-error>
+          <mat-error *ngIf="contactForm.get('message')?.hasError('minlength')">
+            Xabar juda qisqa (kamida 10 belgi)
+          </mat-error>
+        </mat-form-field>
+  
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="isSending || contactForm.invalid"
+          class="submit-button">
+          <span *ngIf="!isSending">Yuborish</span>
+          <span *ngIf="isSending">
+            <mat-spinner diameter="20" color="accent"></mat-spinner>
+          </span>
+        </button>
+      </form>
+  
+      <div class="messages-section">
+        <div class="messages-header">
+          <h3>Yuborilgan xabarlar</h3>
+          <button 
+            mat-icon-button 
+            (click)="toggleMessagesView()"
+            [attr.aria-label]="showMessages ? 'Xabarlarni yopish' : 'Xabarlarni koʻrish'">
+            <mat-icon>{{ showMessages ? 'expand_less' : 'expand_more' }}</mat-icon>
+          </button>
+        </div>
+  
+        <div class="messages-container" *ngIf="showMessages" [@expandCollapse]>
+          <div class="loading-spinner" *ngIf="isLoading">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+  
+          <div class="empty-state" *ngIf="!isLoading && messages.length === 0">
+            <mat-icon>inbox</mat-icon>
+            <p>Xabarlar mavjud emas</p>
+          </div>
+  
+          <div class="message-list" *ngIf="!isLoading && messages.length > 0">
+            <div class="message-item" 
+                 *ngFor="let msg of messages" 
+                 [class.active]="activeMessageId === msg.id"
+                 @fadeIn>
+              <div class="message-header" (click)="toggleMessageDetails(msg.id)">
+                <div class="message-info">
+                  <mat-icon 
+                    class="status-icon {{ getStatusColor(msg.isRead, msg.isResponded) }}">
+                    {{ getStatusIcon(msg.isRead, msg.isResponded) }}
+                  </mat-icon>
+                  <span class="sender">{{ msg.fullName }}</span>
+                  <span class="date">{{ msg.sentAt | date:'mediumDate' }}</span>
+                </div>
+                <mat-icon class="expand-icon">
+                  {{ activeMessageId === msg.id ? 'expand_less' : 'expand_more' }}
+                </mat-icon>
+              </div>
+  
+              <div class="message-details" *ngIf="activeMessageId === msg.id">
+                <div class="detail-row">
+                  <span class="label">Email:</span>
+                  <span class="value">{{ msg.email }}</span>
+                </div>
+                <div class="detail-row" *ngIf="msg.phoneNumber">
+                  <span class="label">Telefon:</span>
+                  <span class="value">{{ msg.phoneNumber }}</span>
+                </div>
+                <div class="detail-row message-text">
+                  <span class="label">Xabar:</span>
+                  <p class="value">{{ msg.message }}</p>
+                </div>
+                <div class="message-actions">
+                  <button mat-icon-button color="warn" (click)="deleteMessage(msg.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

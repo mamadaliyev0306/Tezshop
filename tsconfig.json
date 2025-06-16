@@ -16,7 +16,15 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
-    "module": "ES2022"
+    "module": "ES2022",
+    "baseUrl": "src",  // 👈 bu juda muhim
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@modules/*": ["app/modules/*"],
+      "@components/*":["app/components/*"],
+      "@app/*":["app/*"],
+       "/*":["/*"],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

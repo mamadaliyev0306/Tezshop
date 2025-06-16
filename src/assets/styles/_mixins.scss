@@ -1,0 +1,111 @@
+@use './variables';
+// === FLEX MIXINS ===
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// === TRANSITION MIXIN ===
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+// === BOX SHADOW MIXIN ===
+
+@mixin box-shadow($level: 1) {
+  @if $level == 1 {
+    box-shadow: $shadow-sm;
+  } @else if $level == 2 {
+    box-shadow: $shadow-md;
+  } @else if $level == 3 {
+    box-shadow: $shadow-lg;
+  } @else {
+    // Default fallback
+    box-shadow: none;
+  }
+}
+
+// === RESPONSIVE BREAKPOINT MIXIN ===
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (min-width: variables.$breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (min-width: variables.$breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: variables.$breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: variables.$breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: variables.$breakpoint-xl) { @content; }
+  }
+}
+@mixin tablet {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: 576px) {
+    @content;
+  }
+}
+@mixin small-mobile {
+  @media (max-width: 420px) {
+    @content;
+  }
+}
+@media (max-width: 768px) {
+  ::ng-deep .mat-paginator {
+    .mat-paginator-container {
+      padding: 8px;
+      
+      .mat-paginator-page-size {
+        margin-right: 8px;
+        
+        .mat-paginator-page-size-label {
+          display: none;
+        }
+      }
+      
+      .mat-paginator-range-actions {
+        .mat-paginator-range-label {
+          margin: 0 8px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  ::ng-deep .mat-paginator {
+    .mat-paginator-container {
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      
+      .mat-paginator-page-size {
+        margin-right: 0;
+        order: 2;
+      }
+      
+      .mat-paginator-range-actions {
+        order: 1;
+      }
+    }
+  }
+}

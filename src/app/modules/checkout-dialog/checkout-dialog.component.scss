@@ -1,0 +1,142 @@
+@import '../../../assets/styles/variables';
+
+.checkout-dialog {
+  max-width: 600px;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $primary-color;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($primary-color, 0.1);
+  }
+
+  .checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .order-summary {
+      background: linear-gradient(135deg, rgba($primary-color, 0.03) 0%, rgba($primary-color, 0.01) 100%);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba($primary-color, 0.1);
+
+      h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+        color: $text-primary;
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        font-size: 0.95rem;
+
+        &.total {
+          font-weight: 600;
+          font-size: 1.1rem;
+          padding-top: 0.8rem;
+          margin-top: 0.8rem;
+          border-top: 1px solid rgba($primary-color, 0.1);
+        }
+      }
+    }
+
+    mat-form-field {
+      width: 100%;
+
+      ::ng-deep .mat-form-field-outline {
+        border-radius: 10px;
+        background: rgba(245, 245, 245, 0.8);
+      }
+
+      ::ng-deep .mat-form-field-flex {
+        padding: 8px 14px;
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      mat-icon[matSuffix] {
+        color: rgba($primary-color, 0.7);
+      }
+    }
+
+    mat-select {
+      ::ng-deep .mat-select-value {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  mat-dialog-actions {
+    padding: 1.5rem 0 0 0;
+    margin: 0;
+    border-top: 1px solid rgba($primary-color, 0.1);
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &[color="primary"] {
+        background: linear-gradient(90deg, $primary-color, darken($primary-color, 10%));
+        box-shadow: 0 4px 12px rgba($primary-color, 0.2);
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba($primary-color, 0.3);
+        }
+      }
+
+      mat-icon {
+        font-size: 1.2rem;
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .checkout-dialog {
+    padding: 1rem;
+    
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    .checkout-form {
+      gap: 1rem;
+    }
+
+    mat-dialog-actions {
+      flex-direction: column-reverse;
+      gap: 0.5rem;
+      align-items: stretch;
+
+      button {
+        justify-content: center;
+      }
+    }
+  }
+}

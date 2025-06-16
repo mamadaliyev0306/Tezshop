@@ -1,0 +1,150 @@
+// Colors
+$primary-color: #4361ee;
+$primary-light: #e0e7ff;
+$primary-dark: #3a56d4;
+
+$secondary-color: #3f37c9;
+$secondary-light: #e0dfff;
+$secondary-dark: #3730a3;
+
+$success-color: #10b981;
+$success-light: #d1fae5;
+$success-dark: #0d9268;
+
+$danger-color: #ef4444;
+$danger-light: #fee2e2;
+$danger-dark: #dc2626;
+
+$warning-color: #f59e0b;
+$warning-light: #fef3c7;
+$warning-dark: #d97706;
+
+$info-color: #3b82f6;
+$info-light: #dbeafe;
+$info-dark: #2563eb;
+
+// Text colors
+$text-color: #1f2937;
+$text-secondary: #4b5563;
+$text-tertiary: #6b7280;
+$text-light: #f9fafb;
+$text-on-primary: #ffffff;
+
+// Background colors
+$body-bg: #f9fafb;
+$card-bg: #ffffff;
+$sidebar-bg: #1e293b;
+$header-bg: #ffffff;
+$footer-bg: #f3f4f6;
+
+// Borders
+$border-color: #e5e7eb;
+$border-radius: 8px;
+$border-radius-sm: 4px;
+$border-radius-lg: 12px;
+$divider-color: #e5e7eb; // Border uchun rang
+$overlay-bg: #000000; // Overlay fon rangi
+// Shadows
+$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$box-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$box-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-xxl: 3rem;
+
+// Typography
+$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-xxl: 1.5rem;
+$font-size-xxxl: 2rem;
+
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Transitions
+$transition-fast: 0.15s ease-in-out;
+$transition-normal: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+$z-index-toast: 1080;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;
+
+// theme.scss fayliga quyidagi rang o'zgaruvchilarini qo'shing
+
+// Red color palette
+$red-50: #fef2f2;
+$red-100: #fee2e2;
+$red-200: #fecaca;
+$red-300: #fca5a5;
+$red-400: #f87171;
+$red-500: #ef4444;
+$red-600: #dc2626;
+$red-700: #b91c1c;
+$red-800: #991b1b;
+$red-900: #7f1d1d;
+
+// Yellow color palette
+$yellow-50: #fffbeb;
+$yellow-100: #fef3c7;
+$yellow-200: #fde68a;
+$yellow-300: #fcd34d;
+$yellow-400: #fbbf24;
+$yellow-500: #f59e0b;
+$yellow-600: #d97706;
+$yellow-700: #b45309;
+$yellow-800: #92400e;
+$yellow-900: #78350f;
+
+// Green color palette
+$green-50: #ecfdf5;
+$green-100: #d1fae5;
+$green-200: #a7f3d0;
+$green-300: #6ee7b7;
+$green-400: #34d399;
+$green-500: #10b981;
+$green-600: #059669;
+$green-700: #047857;
+$green-800: #065f46;
+$green-900: #064e3b;
+
+// Blue color palette
+$blue-50: #eff6ff;
+$blue-100: #dbeafe;
+$blue-200: #bfdbfe;
+$blue-300: #93c5fd;
+$blue-400: #60a5fa;
+$blue-500: #3b82f6;
+$blue-600: #2563eb;
+$blue-700: #1d4ed8;
+$blue-800: #1e40af;
+$blue-900: #1e3a8a;
+
+$text-secondary-color: #4b5563;

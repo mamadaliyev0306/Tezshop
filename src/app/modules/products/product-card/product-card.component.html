@@ -1,0 +1,15 @@
+<div class="product-card">
+    <div class="product-image">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" />
+    </div>
+    <div class="product-details">
+      <h3 class="product-title">{{ product.name }}</h3>
+      <p class="product-category">{{ product.categoryName }}</p>
+      <p class="product-price">${{ product.price }}</p>
+      <div class="product-actions">
+        <button (click)="onEditProduct()" [disabled]="loading" class="btn btn-primary">Edit</button>
+        <button (click)="onDeleteProduct()" [disabled]="loading" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+  

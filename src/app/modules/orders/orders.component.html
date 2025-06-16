@@ -1,0 +1,103 @@
+<div class="orders-container">
+  <div class="orders-header">
+    <h2>Mening Buyurtmalarim</h2>
+    <div class="header-actions">
+      <mat-form-field appearance="outline" class="status-filter">
+        <mat-label>Status bo'yicha filtrlash</mat-label>
+        <mat-select [(value)]="selectedStatus" (selectionChange)="onStatusChange()">
+          <mat-option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <button mat-mini-fab color="primary" (click)="refreshOrders()" [disabled]="isRefreshing">
+        <mat-icon [@rotate]="isRefreshing ? 'true' : 'false'">refresh</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="loading-spinner" *ngIf="isLoading && !isRefreshing">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && !hasOrders">
+    <div class="empty-content">
+      <mat-icon class="empty-icon">shopping_bag</mat-icon>
+      <h3>Sizda hali buyurtmalar mavjud emas</h3>
+      <p>Mahsulotlar sahifasiga o'tib, birinchi buyurtmangizni berishingiz mumkin</p>
+      <button mat-raised-button color="primary" routerLink="/products">Mahsulotlar sahifasiga o'tish</button>
+    </div>
+  </div>
+
+  <div class="empty-state" *ngIf="!isLoading && hasOrders && filteredOrders.length === 0">
+    <div class="empty-content">
+      <mat-icon class="empty-icon">filter_alt</mat-icon>
+      <h3>Tanlangan statusdagi buyurtmalar topilmadi</h3>
+      <p>"{{ getStatusLabel(selectedStatus) }}" statusidagi buyurtmalar mavjud emas</p>
+      <button mat-stroked-button (click)="selectedStatus = 'ALL'; filterOrders()">
+        Barcha buyurtmalarni ko'rsatish
+      </button>
+    </div>
+  </div>
+
+  <div class="orders-list" *ngIf="!isLoading && filteredOrders.length > 0">
+    <div class="order-card" 
+         *ngFor="let order of filteredOrders; trackBy: trackByOrderId"
+         [@fadeInOut]>
+      <div class="order-header">
+        <div class="order-info">
+          <span class="order-id">Buyurtma #{{ order.id }}</span>
+          <span class="order-date">{{ order.createdAt | date:'mediumDate' }}</span>
+        </div>
+        <div class="order-status">
+          <span class="status-badge {{ getStatusClass(order.status) }}">
+            {{ getStatusLabel(order.status) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="order-body">
+        <div class="order-items">
+          <div class="item" *ngFor="let item of order.orderItems">
+            <img [src]="item.productImageUrl || 'assets/images/product-placeholder.png'" 
+                 [alt]="item.productName"
+                 class="item-image">
+            <div class="item-details">
+              <h4 class="item-name">{{ item.productName }}</h4>
+              <div class="item-price-quantity">
+                <span class="price">{{ item.unitPrice | currency }}</span>
+                <span class="quantity">x {{ item.quantity }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <div class="summary-row">
+            <span>Mahsulotlar:</span>
+            <span>{{ getTotalItems(order) }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Jami:</span>
+            <span class="total-price">{{ getOrderTotal(order) | currency }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-actions">
+        <button mat-stroked-button 
+                color="primary" 
+                routerLink="/orders/{{order.id}}">
+          Batafsil
+        </button>
+        <button mat-stroked-button 
+                color="warn" 
+                *ngIf="order.status === OrderStatus.Pending || order.status === OrderStatus.Processing"
+                (click)="cancelOrder(order.id)">
+          Bekor qilish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

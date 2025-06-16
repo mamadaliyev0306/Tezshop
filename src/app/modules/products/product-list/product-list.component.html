@@ -1,0 +1,206 @@
+<section class="product-list-container" [@fadeIn]>
+  <!-- Header section -->
+  <div class="header">
+    <h2>All Products</h2>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- Category filter -->
+  <div class="category-filter-container">
+    <div class="category-filter">
+      <button mat-button 
+              [class.active]="selectedCategory === 'ALL'"
+              (click)="filterByCategory('ALL')">
+        All
+      </button>
+      <button mat-button 
+              *ngFor="let category of categories"
+              [class.active]="selectedCategory === category"
+              (click)="filterByCategory(category)">
+        {{category}}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading spinner -->
+  <div class="loading-spinner" *ngIf="isLoading">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="!isLoading && filteredProducts.length === 0">
+    <mat-icon>search_off</mat-icon>
+    <h3>No products found</h3>
+    <p>No products available in the selected category</p>
+  </div>
+
+  <!-- Products grid -->
+  <div class="product-grid">
+    <div *ngFor="let product of paginatedProducts" 
+         class="product-card mat-elevation-z2"
+         [@fadeIn]
+         (click)="goToUserProfile(product)">
+      
+      <!-- Product image -->
+      <a [routerLink]="['/products', product.id]" class="product-image" (click)="$event.stopPropagation()">
+        <img [src]="product.imageUrl || 'assets/images/product-placeholder.png'" 
+             [alt]="product.name"
+             loading="lazy">
+      </a>
+
+      <!-- Product info -->
+      <div class="product-info">
+        <div class="category-badge">{{product.categoryName}}</div>
+        
+        <h3 class="product-name">
+          <a [routerLink]="['/products', product.id]" (click)="$event.stopPropagation()">{{product.name}}</a>
+        </h3>
+        
+        <div class="product-price">
+          <span class="current-price">{{product.price | currency:'UZS':'symbol':'1.0-0'}}</span>
+          <span class="discount" *ngIf="product.discountPercent > 0">
+            {{product.discountPercent}}% off
+          </span>
+        </div>
+
+        <div class="product-meta">
+          <span class="rating">
+            <mat-icon>star</mat-icon>
+            {{product.averageRating || 0 | number:'1.1-1'}}
+          </span>
+          <span class="orders">
+            <mat-icon>shopping_bag</mat-icon>
+            {{product.totalOrders || 0}}
+          </span>
+        </div>
+
+        <!-- Product actions -->
+        <div class="product-actions">
+          <button mat-icon-button 
+                  [class.liked]="product.isLiked"
+                  (click)="toggleLike(product.id, $event)"
+                  [@pulse]="pulse"
+                  matTooltip="Add to favorites">
+            <mat-icon>{{product.isLiked ? 'favorite' : 'favorite_border'}}</mat-icon>
+          </button>
+          
+          <button mat-raised-button color="primary" 
+                  (click)="addToCart(product.id, $event)"
+                  matTooltip="Add to cart">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Add
+          </button>
+          
+          <button mat-raised-button color="accent" class="contact-btn"
+                  (click)="showContactInfo(product, $event)"
+                  matTooltip="Contact seller">
+            <mat-icon>contact_phone</mat-icon>
+            Contact
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load more button -->
+  <div class="load-more-container" *ngIf="showLoadMore && !isLoading">
+    <button mat-raised-button color="primary" (click)="loadMore()">
+      Show 10 more
+    </button>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [length]="totalProducts"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[10, 20, 50]"
+  (page)="onPageChange($event)"
+  aria-label="Sahifalar bo'yicha navigatsiya"
+  *ngIf="totalProducts > 10 && !isLoading"
+  class="custom-paginator">
+</mat-paginator>
+</section>
+<!-- Barcha kategoriyalar uchun umumiy template -->
+<ng-template #categoryTemplate let-products="products" let-title="title">
+  <section class="product-section" *ngIf="products.length > 0">
+    <h2 class="section-title">{{title}}</h2>
+    <div class="product-rows">
+      <div class="product-row">
+        <div *ngFor="let product of products" class="product-card featured-card" 
+             [class.category-1]="product.categoryId === 1"
+             [class.category-2]="product.categoryId === 2"
+             [class.category-3]="product.categoryId === 3">
+          
+          <!-- Product image with proper error handling -->
+          <div class="product-image-container">
+            <a [routerLink]="['/products', product.id]" (click)="$event.stopPropagation()">
+              <img [src]="product.imageUrl || 'assets/images/product-placeholder.png'" 
+                   [alt]="product.name"
+                   loading="lazy"
+                   class="product-img"
+                   (error)="handleImageError($event)">
+            </a>
+          </div>
+          
+          <!-- Product info -->
+          <div class="product-info">
+            <div class="category-badge">{{product.categoryName}}</div>
+            
+            <h3 class="product-name">
+              <a [routerLink]="['/products', product.id]" (click)="$event.stopPropagation()">
+                {{product.name}}
+              </a>
+            </h3>
+            
+            <div class="product-price">
+              <span class="current-price">{{product.price | currency:'UZS':'symbol':'1.0-0'}}</span>
+              <span class="discount" *ngIf="product.discountPercent > 0">
+                {{product.discountPercent}}% chegirma
+              </span>
+            </div>
+
+            <!-- Product actions with proper styling -->
+            <div class="product-actions">
+              <button mat-icon-button 
+                      [class.liked]="product.isLiked"
+                      (click)="toggleLike(product.id, $event)"
+                      matTooltip="Sevimlilarga qo'shish">
+                <mat-icon>{{product.isLiked ? 'favorite' : 'favorite_border'}}</mat-icon>
+              </button>
+              
+              <button mat-button class="add-to-cart-btn"
+                      (click)="addToCart(product.id, $event)"
+                      matTooltip="Savatga qo'shish">
+                <mat-icon>add_shopping_cart</mat-icon>
+                <span>Savatga</span>
+              </button>
+              
+              <button mat-button class="contact-btn"
+                      (click)="showContactInfo(product, $event)"
+                      matTooltip="Bog'lanish">
+                <mat-icon>contact_phone</mat-icon>
+                <span>Bog'lanish</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>
+
+<!-- Kategoriyalarni ko'rsatish -->
+<ng-container *ngTemplateOutlet="categoryTemplate; context: {
+  products: category1Products,
+  title: category1Products[0]?.categoryName || 'Stol va Stular'
+}"></ng-container>
+
+<ng-container *ngTemplateOutlet="categoryTemplate; context: {
+  products: category2Products,
+  title: category2Products[0]?.categoryName || 'Telfonlar'
+}"></ng-container>
+
+<ng-container *ngTemplateOutlet="categoryTemplate; context: {
+  products: category3Products,
+  title: category3Products[0]?.categoryName || 'Darvozalar'
+}"></ng-container>

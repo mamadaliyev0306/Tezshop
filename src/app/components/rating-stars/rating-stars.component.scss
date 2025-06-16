@@ -1,0 +1,20 @@
+.rating-stars {
+    display: flex;
+    cursor: pointer;
+  
+    .star {
+      font-size: 24px;
+      color: #ddd;
+      margin-right: 5px;
+      transition: color 0.2s ease-in-out;
+  
+      &.filled {
+        color: #f39c12; /* Yulduzlarni to'ldirish rangini o'zgartirish */
+      }
+  
+      &:hover {
+        color: #f39c12;
+      }
+    }
+  }
+  
