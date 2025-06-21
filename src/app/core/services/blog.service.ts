@@ -7,12 +7,12 @@ import { NotificationService } from './notification.service';
 import { IBlog } from '../models/blog.model'; // You need to create models for BlogDto, BlogCreateDto, BlogUpdateDto
 import { IBlogCreate } from '../models/blog-create.model';
 import { IBlogUpdate } from '../models/blog-update.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  private readonly API_URL = 'https://localhost:7179/api/blog';
+  private readonly API_URL = `${environment.apiUrl}/api/blog`;
 
   constructor(
     private http: HttpClient,

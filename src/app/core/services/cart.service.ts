@@ -8,11 +8,12 @@ import { ICartItem } from '../models/cart-item-model';
 import { ICartItemCreate } from '../models/cart-item-create.model';
 import { NotificationService } from './notification.service';
 import { switchMap } from 'rxjs/operators';
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private readonly API_URL = 'https://localhost:7179/api/cart';
+  private readonly API_URL = `${environment.apiUrl}/api/cartservice`;
 
   constructor(
     private http: HttpClient,

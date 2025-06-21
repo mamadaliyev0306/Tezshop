@@ -18,12 +18,14 @@ import { IProductFilter } from '@core/models/product-filter.model';
 import { ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
 import { ActivatedRoute } from '@angular/router';
+import { SharedModule } from '@modules/shared/shared.module';
+import { LoadingSpinnerComponent } from '@modules/shared/components/loading-spinner/loading-spinner.component';
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [RouterModule, CommonModule, RouterOutlet, HttpClientModule,FormsModule ]
+  imports: [RouterModule, CommonModule, RouterOutlet, HttpClientModule,FormsModule,SharedModule,LoadingSpinnerComponent ]
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'E-Commerce App';

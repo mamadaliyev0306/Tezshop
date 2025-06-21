@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://localhost:7179",
+      "target": "https://tablechair-latest.onrender.com",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"

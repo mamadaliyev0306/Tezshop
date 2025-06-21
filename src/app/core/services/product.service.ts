@@ -7,9 +7,10 @@ import { NotificationService } from './notification.service';
 import { IProductFilter } from '../models/product-filter.model'; // <-- filtering uchun model
 import { ICreateProduct } from '../models/product-create.model';
 import { IUpdateProduct } from '../models/product-update.model';
+import { environment } from 'environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  private readonly API_URL = 'https://localhost:7179/api/product';
+  private readonly API_URL = `${environment.apiUrl}/api/product`;
   private productsCache = new BehaviorSubject<IProduct[] | null>(null);
 
   constructor(

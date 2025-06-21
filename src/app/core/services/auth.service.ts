@@ -186,4 +186,11 @@ export class AuthService {
       serverError: error.error
     }));
   }
+  getToken(): string | null {
+    // Agar SSR (Server-Side Rendering) ishlatayotgan bo'lsangiz
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('token');
+    }
+    return this.currentUserValue?.token || null;
+  }
 }

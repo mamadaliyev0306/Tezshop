@@ -8,12 +8,12 @@ import { ICreateOrder } from '../models/order-create.model';
 import { ICheckout } from '../models/order-Chekout.model';
 import { OrderStatus } from '../models/enum/orderstuts.enum';
 import { NotificationService } from './notification.service';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private readonly API_URL = 'https://localhost:7179/api/order';
+  private readonly API_URL = `${environment.apiUrl}/api/order`;
 
 
 

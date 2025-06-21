@@ -7,12 +7,12 @@ import {
 } from '../models/faq.models';
 import { IFaq } from '../models/faq.model';
 import { Observable } from 'rxjs';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class FaqService {
-  private readonly API_URL = 'https://localhost:7179/api/faq';
+  private readonly API_URL = `${environment.apiUrl}/api/Faq`;
 
   constructor(private http: HttpClient) {}
 

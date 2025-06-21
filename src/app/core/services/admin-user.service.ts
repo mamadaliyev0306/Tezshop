@@ -3,12 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAdminUserUpdate } from '../models/admin-user-update.model';
 import { IUserFilter } from '../models/user-filter.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AdminUserService {
-  private readonly API_URL = 'https://localhost:7179/api/adminusers';
+  private readonly API_URL = `${environment.apiUrl}/api/adminuser`;
 
   constructor(private http: HttpClient) {}
 

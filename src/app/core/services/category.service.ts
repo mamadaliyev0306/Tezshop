@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ICategory } from '../models/category.model';
 import { ICategoryCreate } from '../models/category-create.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private readonly API_URL = 'https://localhost:7179/api/category';
+  private readonly API_URL = `${environment.apiUrl}/api/category`;
 
   constructor(private http: HttpClient) {}
 

@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ICreateTestimonial,ITestimonial } from '../models/testimonial.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class TestimonialService {
-  private readonly apiUrl = 'https://localhost:7179/api/testimonial';
+  private readonly apiUrl = `${environment.apiUrl}/api/testimonial`;
 
   constructor(private http: HttpClient) {}
 

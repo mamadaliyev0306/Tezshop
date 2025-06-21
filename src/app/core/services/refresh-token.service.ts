@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { RefreshToken } from '../models/refresh-token.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class RefreshTokenService {
-  private readonly API_URL = 'https://localhost:7179/api/token';
+  private readonly API_URL = `${environment.apiUrl}/api/refreshtoken`;
 
   constructor(private http: HttpClient) {}
 

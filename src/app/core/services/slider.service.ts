@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ISlider,ICreateSlider } from '../models/slider.model';
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class SliderService {
-  private readonly apiUrl = 'https://localhost:7179/api/slider';
+  private readonly apiUrl = `${environment.apiUrl}/api/slider`;
 
   constructor(private http: HttpClient) {}
 

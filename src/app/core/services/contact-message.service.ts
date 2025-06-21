@@ -6,12 +6,12 @@ import { IContactMessage } from '../models/contact-message.model';
 import { IContactMessageCreate } from '../models/contact-message-create.model';
 import { catchError, tap } from 'rxjs/operators';
 import { NotificationService } from './notification.service';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class ContactMessageService {
-  private readonly API_URL = 'https://localhost:7179/api/contactmessage';
+  private readonly API_URL = `${environment.apiUrl}/api/contactmessage`;
 
   constructor(
     private http: HttpClient,

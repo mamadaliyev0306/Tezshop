@@ -4,12 +4,12 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ShippingAddressCreate } from '../models/shipping-address-create';
 import { ShippingAddressUpdate } from '../models/shipping-address-update';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingAddressService {
-  private baseUrl = 'https://localhost:7179/api/shippingaddress'; // Backend API URL
+  private baseUrl = `${environment.apiUrl}/api/shippingaddress`; // Backend API URL
 
   // HTTP headers for authorization (if required)
   private headers = new HttpHeaders({

@@ -6,12 +6,12 @@ import {
   INewsletterSubscription,
   INewsletterSubscriptionCreate
 } from '../models/newsletter-subscription.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class NewsletterSubscriptionService {
-  private readonly API_URL = 'https://localhost:7179/api/NewsletterSubscription';
+  private readonly API_URL = `${environment.apiUrl}/api/newslettersubscription`;
 
   constructor(private http: HttpClient) {}
 

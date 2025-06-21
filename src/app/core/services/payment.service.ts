@@ -14,12 +14,12 @@ import {
 } from '../models/payment.model';
 import { IPaymentFilter } from '../models/payment-filter.model';
 import { NotificationService } from './notification.service';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class PaymentService {
-  private readonly baseUrl = 'https://localhost:7179/api/payment';
+  private readonly baseUrl = `${environment.apiUrl}/api/payment`;
 
   constructor(
     private http: HttpClient,

@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IAboutInfo } from '../models/aboutInfo.model';
 import { IAboutInfoCreate } from '../models/aboutInfo-create.model';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class AboutInfoService {
-  private readonly API_URL = 'https://localhost:7179/api/AboutInfo';
+  private readonly API_URL = `${environment.apiUrl}/api/AboutInfo`;
+
 
   constructor(private http: HttpClient) {}
 

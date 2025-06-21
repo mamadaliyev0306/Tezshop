@@ -10,7 +10,7 @@ import { NotificationService } from './notification.service';
 
 })
 export class WishlistService {
-  private readonly API_URL = `https://localhost:7179/api/WishlistItem`;
+  private readonly API_URL = `${environment.apiUrl}/api/wishlist`;
 
   constructor(private http: HttpClient,
     private notification: NotificationService

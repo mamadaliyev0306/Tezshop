@@ -4,11 +4,12 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { IUser} from '@core/models/user.model';
 import { UserProfileUpdate } from '@core/models/user-profile-update.model';
 import { map } from 'rxjs/operators';
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly API_URL = 'https://localhost:7179/api/users';
+  private readonly API_URL = `${environment.apiUrl}/api/user`;
 
   constructor(private http: HttpClient) {}
 

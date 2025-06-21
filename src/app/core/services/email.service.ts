@@ -13,12 +13,12 @@ import {
   SendNewUserNotificationToAdminRequest
 } from '../models/email.models';
 import { Observable } from 'rxjs';
-
+import { environment } from 'environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class EmailService {
-  private readonly API_URL = 'https://localhost:7179/api/email';
+  private readonly API_URL = `${environment.apiUrl}/api/Email`;
 
   constructor(private http: HttpClient) {}
 
