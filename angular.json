@@ -35,11 +35,31 @@
               }
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/animate.css/animate.min.css",
-              "node_modules/primeicons/primeicons.css"
+              {
+                "input": "src/styles.scss",
+                "inject": false,
+                "bundleName": "styles"
+              },
+              {
+                "input": "node_modules/animate.css/animate.min.css",
+                "inject": false,
+                "bundleName": "animate"
+              },
+              {
+                "input": "node_modules/primeicons/primeicons.css",
+                "inject": false,
+                "bundleName": "primeicons"
+              }
             ],
-            "scripts": []
+            "scripts": [],
+            "optimization": {
+              "styles": {
+                "minify": true,
+                "inlineCritical": false
+              },
+              "scripts": true,
+              "fonts": true
+            }
           },
           "configurations": {
             "production": {
@@ -51,18 +71,28 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "10kb",
-                  "maximumError": "20kb"
+                  "maximumWarning": "30kb",
+                  "maximumError": "45kb"
                 }
               ],
               "outputHashing": "all",
-              "optimization": true,
-              "sourceMap": false
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
