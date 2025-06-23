@@ -80,7 +80,7 @@ export class LoginComponent {
       finalize(() => this.loading = false)
     ).subscribe({
       next: (response) => {
-        localStorage.setItem('accesstoken', response.accesstoken);
+        localStorage.setItem('accesstoken', response.accessToken);
         this.router.navigate(['/profile']); 
       },
       error: (error) => {
