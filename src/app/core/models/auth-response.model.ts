@@ -14,6 +14,6 @@ export interface UserResponse {
 export interface AuthResponse {
   accesstoken: string;
   refreshToken: string;
-  tokenExpires: string | Date;
+  accesstokenExpires: string | Date;
   userResponse: UserResponse;
 }
