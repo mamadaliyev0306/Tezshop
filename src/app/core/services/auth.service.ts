@@ -68,10 +68,16 @@ export class AuthService {
 
   login(credentials: IUserLogin): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => this.storeAuthData(response)),
+      tap(response => {
+        if (!response || !response.accessToken || !response.userResponse) {
+          throw new Error('Invalid authentication data received');
+        }
+        this.storeAuthData(response);
+      }),
       catchError(this.handleError)
     );
   }
+  
 
 
 
@@ -150,14 +156,14 @@ export class AuthService {
   
 
   private storeAuthData(authData: AuthResponse): void {
-    if (!authData?.accesstoken || !authData?.refreshToken) {
+    if (!authData?.accessToken || !authData?.refreshToken) {
       console.error('Invalid auth data:', authData);
       throw new Error('Invalid authentication data received');
     }
   
     if (this.platformDetector.isBrowser()) {
       try {
-        localStorage.setItem('accesstoken', authData.accesstoken);
+        localStorage.setItem('accesstoken', authData.accessToken);
         localStorage.setItem('refreshToken', authData.refreshToken);
         
         if (authData.accessTokenExpiresAt) {
