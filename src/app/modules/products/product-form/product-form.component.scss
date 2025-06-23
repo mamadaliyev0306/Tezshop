@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 @use '../../../../assets/styles/colors.scss' as *;
 
 form {
@@ -41,7 +41,7 @@ form {
   }
 
   button[mat-raised-button]:hover {
-    background-color: #1976d2;
+    background-color: $button-hover-bg-color;
   }
 }
 
@@ -60,52 +60,56 @@ mat-spinner {
     transform: translateY(0);
   }
 }
+
 // Category select
 .mat-select {
-  background-color: #66c537;
+  background-color: color.adjust($primary-color, $lightness: 20%);
   border-radius: 8px;
   transition: background-color 0.3s ease;
 }
 
 .mat-select:hover {
-  background-color: #6d8ec0;
+  background-color: color.adjust($primary-color, $lightness: 10%);
 }
 
 // Mat-option tanlanganda rang o'zgaradi
 .mat-option.mat-selected {
-  background-color: #1976d2 !important; // Tanlangan fon rangi
-  color: #fff !important; // Matn rangi
+  background-color: $primary-color !important;
+  color: #fff !important;
   font-weight: bold;
 }
 
 // Mat-option hover holati
 .mat-option:hover {
-  background-color: #bbdefb !important;
-  color: #0d47a1;
-}
-::ng-deep .mat-select-panel {
-  background-color: #f3faff !important; /* Orqa fon rangi */
-  color: #333; /* Matn rangi */
-  border-radius: 8px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  background-color: color.adjust($primary-color, $lightness: 40%) !important;
+  color: color.adjust($primary-color, $lightness: -20%);
 }
 
-::ng-deep .mat-option {
-  transition: background-color 0.3s;
-}
+:host ::ng-deep {
+  .mat-select-panel {
+    background-color: #f3faff !important;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 
-::ng-deep .mat-option:hover {
-  background-color: #d0ebff !important; /* Hoverda fon */
-  color: #004085;
-}
+  .mat-option {
+    transition: background-color 0.3s;
+  }
 
-::ng-deep .mat-option.mat-active {
-  background-color: #90caf9 !important; /* Fokustagi item */
-  color: #0d47a1;
-}
+  .mat-option:hover {
+    background-color: #d0ebff !important;
+    color: #004085;
+  }
 
-::ng-deep .mat-option.mat-selected {
-  background-color: #1976d2 !important;
-  color: #fff !important;
-  font-weight: 600;
+  .mat-option.mat-active {
+    background-color: #90caf9 !important;
+    color: #0d47a1;
+  }
+
+  .mat-option.mat-selected {
+    background-color: $primary-color !important;
+    color: #fff !important;
+    font-weight: 600;
+  }
 }

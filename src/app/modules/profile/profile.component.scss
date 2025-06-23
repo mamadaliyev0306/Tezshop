@@ -1,6 +1,8 @@
+
+@use "sass:color";
+@use '../../../assets/styles/colors.scss' as *;
 @use '../../../assets/styles/profile/mixins' as *;
-@use'../../../assets/styles/colors.scss' as*;
-@use 'sass:color';
+
 .profile-container {
   max-width: 1200px;
   margin: 2rem auto;
@@ -15,7 +17,7 @@
   gap: 2rem;
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid $divider-color;
+  border-bottom: 1px solid #e0e0e0;
 
   @include mobile {
     flex-direction: column;
@@ -74,7 +76,7 @@
     color: white;
 
     &:hover {
-      background:  color.adjust($primary-color, $lightness: -10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
 }
@@ -97,7 +99,7 @@
 
 .profile-nav {
   display: flex;
-  border-bottom: 1px solid $divider-color;
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 2rem;
 
   button {
@@ -159,7 +161,7 @@
 }
 
 .product-card {
-  border: 1px solid $divider-color;
+  border: 1px solid #e0e0e0;;
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -228,7 +230,7 @@
   .detail-row {
     display: flex;
     padding: 1rem 0;
-    border-bottom: 1px solid $divider-color;
+    border-bottom: 1px solid #e0e0e0;
 
     &:last-child {
       border-bottom: none;

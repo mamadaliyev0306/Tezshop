@@ -13,7 +13,7 @@ export class SliderService {
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Token localStorage yoki boshqa joydan olinadi
+    const token = localStorage.getItem('accesstoken'); // Token localStorage yoki boshqa joydan olinadi
     return new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`

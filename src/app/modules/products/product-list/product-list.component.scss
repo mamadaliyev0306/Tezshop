@@ -1,6 +1,6 @@
-@use 'sass:color';
-@use 'sass:map';
+@use "sass:color";
 @use '../../../../assets/styles/colors.scss' as *;
+@use 'sass:map';
 @use '../../../../assets/styles/mixins' as *;
 
 .product-list-container {
@@ -116,7 +116,7 @@
     align-items: center;
     justify-content: center;
     min-height: 300px;
-    background: $background-color;
+    background-color: color.adjust($primary-color, $lightness: 90%);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;

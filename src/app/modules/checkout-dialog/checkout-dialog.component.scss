@@ -1,5 +1,5 @@
-@import '../../../assets/styles/variables';
-
+@use '../../../assets/styles/variables' as *;
+@use "sass:color";
 .checkout-dialog {
   max-width: 600px;
   width: 100%;
@@ -99,7 +99,7 @@
       transition: all 0.3s ease;
 
       &[color="primary"] {
-        background: linear-gradient(90deg, $primary-color, darken($primary-color, 10%));
+        background: linear-gradient(90deg, $primary-color, color.adjust($primary-color, $lightness: 10%));
         box-shadow: 0 4px 12px rgba($primary-color, 0.2);
         
         &:hover {

@@ -1,44 +1,43 @@
-// src/styles/colors.scss
+@use "sass:color";
 
-// Asosiy ranglar
-$primary-color: #3498db;  // Asosiy rang
-$secondary-color: #2ecc71; // Ikkinchi darajali rang
-$accent-color: #e74c3c; // Aksent rang
+// === Asosiy ranglar ===
+$primary-color: #007bff;
+$secondary-color: #2ecc71;
+$accent-color: #e74c3c;
 
-// Fon ranglari
-$background-color: #f4f4f4; // Orqa fon rang
-$card-background-color: #ffffff; // Kartochka fon rangi
+// === Fon ranglari ===
+$background-color: #f4f4f4;
+$card-background-color: #ffffff;
 
-// Matn ranglari
-$text-color: #333333; // Asosiy matn rangi
-$heading-color: #2c3e50; // Sarlavhalar uchun matn rangi
-$subtext-color: #7f8c8d; // Sub-matn rangi
-
-// Buton ranglari
-$button-bg-color: $primary-color; // Buton fon rangi
-$button-text-color: #ffffff; // Buton matni rangi
-$button-hover-bg-color: darken($primary-color, 10%); // Buton hover holatidagi fon rangi
-
-// Chegaralar
-$border-color: #dddddd; // Chegaralar uchun rang
-
-// Xato va tasdiqlash ranglari
-$error-color: #e74c3c; // Xatolik uchun rang
-$success-color: #2ecc71; // Muvaffaqiyat uchun rang
-$warning-color: #f39c12; // Ogohlantirish uchun rang
-$info-color: #3498db; // Ma'lumot uchun rang
-$divider-color: #e0e0e0;
-$secondary-text: $subtext-color;
+// === Matn ranglari ===
+$text-color: #333333;
+$heading-color: #2c3e50;
+$subtext-color: #7f8c8d;
+$text-tertiary: #b0bec5;
 $primary-text: $text-color;
-$warn-color: $warning-color;
-$card-bg: $card-background-color;
+$secondary-text: $subtext-color;
+
+// === Buton ranglari ===
+$button-bg-color: $primary-color;
+$button-text-color: #ffffff;
+$button-hover-bg-color: color.adjust($primary-color, $lightness: -10%);
+
+// === Chegaralar va soyalar ===
+$border-color: #dddddd;
+$divider-color: #e0e0e0;
 $box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 $box-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
 $border-radius: 8px;
-$spacing-md: 1.5rem;
-$text-tertiary: #b0bec5;
-$transition-normal: 0.3s ease;
 
-$primary-color: #007bff;
-$disabled-color: #6c757d; // Disabled elementlar uchun rang
-$button-hover-bg-color: adjust-color($primary-color, $lightness: -10%);
+// === Xabar ranglari ===
+$error-color: #e74c3c;
+$success-color: #2ecc71;
+$warning-color: #f39c12;
+$warn-color: $warning-color;
+$info-color: #3498db;
+
+// === Boshqa ===
+$card-bg: $card-background-color;
+$disabled-color: #6c757d;
+$spacing-md: 1.5rem;
+$transition-normal: 0.3s ease;

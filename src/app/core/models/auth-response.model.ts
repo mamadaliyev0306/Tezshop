@@ -12,7 +12,7 @@ export interface UserResponse {
 }
 
 export interface AuthResponse {
-  token: string;
+  accesstoken: string;
   refreshToken: string;
   tokenExpires: string | Date;
   userResponse: UserResponse;

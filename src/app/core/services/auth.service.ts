@@ -38,7 +38,7 @@ export class AuthService {
 
   public get token(): string | null {
     return this.platformDetector.isBrowser() 
-      ? localStorage.getItem('token') 
+      ? localStorage.getItem('accesstoken') 
       : null;
   }
 
@@ -132,7 +132,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accesstoken');
     if (!token) return false;
     
     // Token muddatini tekshirish
@@ -142,12 +142,12 @@ export class AuthService {
   
 
   private storeAuthData(authData: AuthResponse): void {
-    if (!authData?.token || !authData?.refreshToken || !authData?.tokenExpires) {
+    if (!authData?.accesstoken || !authData?.refreshToken || !authData?.tokenExpires) {
       throw new Error('Invalid authentication data received');
     }
   
     if (this.platformDetector.isBrowser()) {
-      localStorage.setItem('token', authData.token);
+      localStorage.setItem('accesstoken', authData.accesstoken);
       localStorage.setItem('refreshToken', authData.refreshToken);
   
       // <-- faqat ISO format
@@ -163,7 +163,7 @@ export class AuthService {
 
   private clearAuthData(): void {
     if (this.platformDetector.isBrowser()) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('accesstoken');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('tokenExpires');
       localStorage.removeItem('currentUser');
@@ -189,7 +189,7 @@ export class AuthService {
   getToken(): string | null {
     // Agar SSR (Server-Side Rendering) ishlatayotgan bo'lsangiz
     if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem('token');
+      return localStorage.getItem('accestoken');
     }
     return this.currentUserValue?.token || null;
   }
