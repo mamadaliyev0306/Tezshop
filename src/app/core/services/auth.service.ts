@@ -132,29 +132,44 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
+    if (!this.platformDetector.isBrowser()) return false;
+    
     const token = localStorage.getItem('accesstoken');
     if (!token) return false;
     
-    // Token muddatini tekshirish
-    const expires = localStorage.getItem('tokenExpires');
-    return expires ? new Date(expires) > new Date() : false;
+    try {
+      const expires = localStorage.getItem('tokenExpires');
+      if (!expires) return true; // Agar expires bo'lmasa, token borligini hisobga olamiz
+      
+      return new Date(expires) > new Date();
+    } catch (e) {
+      console.error('Token expiration check error:', e);
+      return false;
+    }
   }
   
 
   private storeAuthData(authData: AuthResponse): void {
-    if (!authData?.accesstoken || !authData?.refreshToken || !authData?.tokenExpires) {
+    if (!authData?.accesstoken || !authData?.refreshToken) {
+      console.error('Invalid auth data:', authData);
       throw new Error('Invalid authentication data received');
     }
   
     if (this.platformDetector.isBrowser()) {
-      localStorage.setItem('accesstoken', authData.accesstoken);
-      localStorage.setItem('refreshToken', authData.refreshToken);
-  
-      // <-- faqat ISO format
-      const expires = new Date(authData.tokenExpires).toISOString();
-      localStorage.setItem('tokenExpires', expires);
-  
-      localStorage.setItem('currentUser', JSON.stringify(authData.userResponse || {}));
+      try {
+        localStorage.setItem('accesstoken', authData.accesstoken);
+        localStorage.setItem('refreshToken', authData.refreshToken);
+        
+        if (authData.tokenExpires) {
+          const expires = new Date(authData.tokenExpires).toISOString();
+          localStorage.setItem('tokenExpires', expires);
+        }
+        
+        localStorage.setItem('currentUser', JSON.stringify(authData.userResponse || {}));
+      } catch (e) {
+        console.error('LocalStorage error:', e);
+        throw new Error('Failed to store authentication data');
+      }
     }
   
     this.currentUserSubject.next(authData.userResponse || null);
@@ -189,7 +204,7 @@ export class AuthService {
   getToken(): string | null {
     // Agar SSR (Server-Side Rendering) ishlatayotgan bo'lsangiz
     if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem('accestoken');
+      return localStorage.getItem('accesstoken');
     }
     return this.currentUserValue?.token || null;
   }
