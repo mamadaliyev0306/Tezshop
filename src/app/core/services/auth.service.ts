@@ -160,8 +160,8 @@ export class AuthService {
         localStorage.setItem('accesstoken', authData.accesstoken);
         localStorage.setItem('refreshToken', authData.refreshToken);
         
-        if (authData.accessTokenExpires) {
-          const expires = new Date(authData.accessTokenExpires).toISOString();
+        if (authData.accessTokenExpiresAt) {
+          const expires = new Date(authData.accessTokenExpiresAt).toISOString();
           localStorage.setItem('tokenExpires', expires);
         }
         
